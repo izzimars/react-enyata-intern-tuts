@@ -11,48 +11,25 @@ const catalogue = [
 ];
 
 // Reformat catalogue data into this schema
-const formattedCatalogue = [
-  {
-    categoryName: 'Sporting Goods',
-    categoryItems: [
-      {
-        price: '',
-        stocked: true,
-        name: ''
-      },
-      {
-        price: '',
-        stocked: true,
-        name: ''
-      },
-      {
-        price: '',
-        stocked: true,
-        name: ''
-      }
-    ]
-  },
-  {
-    categoryName: 'Sporting Goods',
-    categoryItems: [
-      {
-        price: '',
-        stocked: true,
-        name: ''
-      },
-      {
-        price: '',
-        stocked: true,
-        name: ''
-      },
-      {
-        price: '',
-        stocked: true,
-        name: ''
-      }
-    ]
+function cataloguerReshape(oldarray) {
+  const newarr = [];
+  const remind = [];
+  for (let i = 0; i < catalogue.length; i++) {
+    const element = catalogue[i];
+    if (remind.includes(element.category)) {
+      const idx = remind.indexOf(element.category);
+      newarr[idx].value.push(catalogue[i]);
+    }
+    else {
+      remind.push(element.category);
+      newarr.push({ cartegoryName: element.category, value: [catalogue[i]] });
+    }
+    return newarr;
   }
-];
+}
+
+arrlst = cataloguerReshape(catalogue);
+console.log(arrlst)
 
 function App() {
   const [searchCatalogueValue, setSearchCatalogueValue] = useState('');
